@@ -1,0 +1,250 @@
+# Amazon Affiliate Product Importer Translation Template
+# Copyright (C) 2025 Amazon Affiliate Product Importer
+# This file is distributed under the same license as the Amazon Affiliate Product Importer package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Amazon Affiliate Product Importer 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/amazon-affiliate-importer\n"
+"POT-Creation-Date: 2025-01-01 12:00+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2025-01-01 12:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+
+#: amazon-affiliate-importer.php:XX
+msgid "Amazon Affiliate Product Importer requires WooCommerce to be installed and active."
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Amazon Affiliate Importer"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Amazon Importer"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Import Product"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Settings"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Imported Products"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Enter an Amazon product URL with your affiliate tag to import it to WooCommerce."
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Amazon Product URL"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Make sure to include your Amazon affiliate tag in the URL (e.g., ?tag=your-affiliate-tag)"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Product Category"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Select a category"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Choose a WooCommerce category for the imported product."
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Product Status"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Draft"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Published"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Private"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Import Images"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Import product images from Amazon"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Product imported successfully!"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "View Product"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "How to Use"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Copy the Amazon product URL from your browser"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Add your affiliate tag to the URL (e.g., ?tag=your-tag)"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Paste the URL in the form above"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Select category and other options"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Click \"Import Product\""
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Supported Formats"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Settings saved!"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Amazon Affiliate Importer Settings"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Default Category"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "No default category"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Auto Publish"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Save as Draft"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Publish Immediately"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Automatically import product images"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Price Sync"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Sync prices periodically (requires cron job)"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Imported Amazon Products"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Product"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "ASIN"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Affiliate Tag"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Imported Date"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Actions"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "No products imported yet."
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Product not found"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Edit"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "View"
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: includes/class-admin.php:XX
+msgid "Unknown error occurred."
+msgstr ""
+
+#: includes/class-product.php:XX
+msgid "Please provide a valid Amazon product URL."
+msgstr ""
+
+#: includes/class-product.php:XX
+msgid "Could not extract product ASIN from URL."
+msgstr ""
+
+#: includes/class-product.php:XX
+msgid "This product has already been imported."
+msgstr ""
+
+#: includes/class-product.php:XX
+msgid "Buy on Amazon"
+msgstr ""
+
+#: includes/class-product.php:XX
+msgid "Failed to create product."
+msgstr ""
+
+#: includes/class-product.php:XX
+msgid "Amazon URL"
+msgstr ""
+
+#: includes/class-scraper.php:XX
+msgid "Could not extract product information from Amazon page."
+msgstr ""
+
+#: includes/class-scraper.php:XX
+msgid "Could not fetch Amazon page. Please check the URL and try again."
+msgstr ""
+
+#: includes/class-scraper.php:XX
+msgid "HTTP Error %d when fetching Amazon page."
+msgstr ""
+
+#: includes/class-scraper.php:XX
+msgid "Empty response from Amazon page."
+msgstr ""
