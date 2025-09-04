@@ -56,13 +56,23 @@ add_action('admin_init', function() {
     }
 });
 
-// Declare WooCommerce HPOS compatibility early
+// Declare WooCommerce HPOS compatibility early - this must be done before WooCommerce loads
 add_action('before_woocommerce_init', function() {
     if (class_exists('\Automattic\WooCommerce\Utilities\FeaturesUtil')) {
-        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', __FILE__, true);
-        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('cart_checkout_blocks', __FILE__, true);
+        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', plugin_basename(__FILE__), true);
+        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('cart_checkout_blocks', plugin_basename(__FILE__), true);
     }
 });
+
+// Alternative compatibility declaration for older WooCommerce versions
+if (!function_exists('amazon_affiliate_importer_declare_hpos_compatibility')) {
+    function amazon_affiliate_importer_declare_hpos_compatibility() {
+        if (class_exists('\Automattic\WooCommerce\Utilities\FeaturesUtil')) {
+            \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', plugin_basename(__FILE__), true);
+        }
+    }
+    add_action('before_woocommerce_init', 'amazon_affiliate_importer_declare_hpos_compatibility');
+}
 
 // Include the install class early for activation hook
 require_once AMAZON_AFFILIATE_IMPORTER_PLUGIN_DIR . 'includes/class-install.php';
