@@ -217,73 +217,112 @@ class AmazonAffiliateImporter_Product {
      * Create WooCommerce product
      */
     private function create_woocommerce_product($product_data, $amazon_url, $options, $category_ids = array()) {
-        // Create external product
-        $product = new WC_Product_External();
-        
-        // Set basic product data
-        $product->set_name($product_data['title']);
-        $product->set_description($this->format_product_description($product_data['description'], $product_data['features']));
-        $product->set_short_description($this->format_short_description($product_data['short_description']));
-        $product->set_regular_price($product_data['price']);
-        $product->set_button_text(__('Buy on Amazon', 'amazon-affiliate-importer'));
-        $product->set_product_url($amazon_url);
-        
-        // Set status
-        $status = isset($options['status']) ? $options['status'] : 'draft';
-        $product->set_status($status);
-        
-        // Set categories (use provided category_ids or fallback to manual selection)
-        $categories_to_set = !empty($category_ids) ? $category_ids : array();
-        if (empty($categories_to_set) && isset($options['category_id']) && $options['category_id']) {
-            $categories_to_set = array($options['category_id']);
-        }
-        
-        if (!empty($categories_to_set)) {
-            $product->set_category_ids($categories_to_set);
-        }
-        
-        // Save product
-        $product_id = $product->save();
-        
-        if (!$product_id) {
-            return new WP_Error('create_failed', __('Failed to create product.', 'amazon-affiliate-importer'));
-        }
-        
-        // Import images if requested
-        if (isset($options['import_images']) && $options['import_images'] && !empty($product_data['images'])) {
-            $this->import_product_images($product_id, $product_data['images']);
-        }
-        
-        // Add custom meta
-        update_post_meta($product_id, '_amazon_asin', $product_data['asin']);
-        update_post_meta($product_id, '_amazon_url', $amazon_url);
-        update_post_meta($product_id, '_imported_from_amazon', true);
-        
-        // Store category extraction info
-        if (!empty($category_ids)) {
-            update_post_meta($product_id, '_amazon_extracted_categories', $category_ids);
-        }
-        
-        // Save rating data if available
-        if (isset($product_data['rating']) || isset($product_data['review_count'])) {
-            $rating = isset($product_data['rating']) ? $product_data['rating'] : null;
-            $count = isset($product_data['review_count']) ? $product_data['review_count'] : null;
+        try {
+            // Create external product
+            $product = new WC_Product_External();
             
-            // Build reviews URL for this product
-            $reviews_url = $this->build_amazon_reviews_url($amazon_url, $product_data['asin']);
+            // Set basic product data with proper sanitization
+            $product->set_name(wp_strip_all_tags($product_data['title']));
+            $product->set_description($this->format_product_description($product_data['description'], $product_data['features']));
+            $product->set_short_description($this->format_short_description($product_data['short_description']));
             
-            update_post_meta($product_id, '_amazon_rating', $rating);
-            update_post_meta($product_id, '_amazon_review_count', $count);
-            update_post_meta($product_id, '_amazon_reviews_url', $reviews_url);
+            // Set price with proper validation
+            if (!empty($product_data['price']) && is_numeric($product_data['price'])) {
+                $product->set_regular_price($product_data['price']);
+            }
+            
+            $product->set_button_text(__('Buy on Amazon', 'amazon-affiliate-importer'));
+            $product->set_product_url(esc_url_raw($amazon_url));
+            
+            // Set status with validation
+            $allowed_statuses = array('draft', 'publish', 'private');
+            $status = isset($options['status']) && in_array($options['status'], $allowed_statuses) ? $options['status'] : 'draft';
+            $product->set_status($status);
+            
+            // Set SKU if not already exists
+            if (!empty($product_data['asin'])) {
+                $sku = 'amazon-' . $product_data['asin'];
+                if (!wc_product_sku_exists($sku)) {
+                    $product->set_sku($sku);
+                }
+            }
+            
+            // Set categories (use provided category_ids or fallback to manual selection)
+            $categories_to_set = !empty($category_ids) ? array_map('intval', $category_ids) : array();
+            if (empty($categories_to_set) && isset($options['category_id']) && $options['category_id']) {
+                $categories_to_set = array(intval($options['category_id']));
+            }
+            
+            if (!empty($categories_to_set)) {
+                $product->set_category_ids($categories_to_set);
+            }
+            
+            // Set featured status if specified
+            if (isset($options['featured']) && $options['featured']) {
+                $product->set_featured(true);
+            }
+            
+            // Set catalog visibility
+            $visibility = isset($options['catalog_visibility']) ? $options['catalog_visibility'] : 'visible';
+            $product->set_catalog_visibility($visibility);
+            
+            // Save product
+            $product_id = $product->save();
+            
+            if (!$product_id) {
+                return new WP_Error('create_failed', __('Failed to create product.', 'amazon-affiliate-importer'));
+            }
+            
+            // Import images if requested
+            if (isset($options['import_images']) && $options['import_images'] && !empty($product_data['images'])) {
+                $this->import_product_images($product_id, $product_data['images']);
+            }
+            
+            // Add custom meta with proper sanitization
+            update_post_meta($product_id, '_amazon_asin', sanitize_text_field($product_data['asin']));
+            update_post_meta($product_id, '_amazon_url', esc_url_raw($amazon_url));
+            update_post_meta($product_id, '_imported_from_amazon', true);
+            update_post_meta($product_id, '_amazon_import_date', current_time('mysql'));
+            
+            // Store category extraction info
+            if (!empty($category_ids)) {
+                update_post_meta($product_id, '_amazon_extracted_categories', array_map('intval', $category_ids));
+            }
+            
+            // Save rating data if available
+            if (isset($product_data['rating']) || isset($product_data['review_count'])) {
+                $rating = isset($product_data['rating']) ? floatval($product_data['rating']) : null;
+                $count = isset($product_data['review_count']) ? intval($product_data['review_count']) : null;
+                
+                // Build reviews URL for this product
+                $reviews_url = $this->build_amazon_reviews_url($amazon_url, $product_data['asin']);
+                
+                if ($rating !== null) {
+                    update_post_meta($product_id, '_amazon_rating', $rating);
+                }
+                if ($count !== null) {
+                    update_post_meta($product_id, '_amazon_review_count', $count);
+                }
+                if (!empty($reviews_url)) {
+                    update_post_meta($product_id, '_amazon_reviews_url', esc_url_raw($reviews_url));
+                }
+            }
+            
+            // Save video data if available
+            if (isset($product_data['videos']) && !empty($product_data['videos'])) {
+                $videos = is_array($product_data['videos']) ? $product_data['videos'] : array();
+                update_post_meta($product_id, '_amazon_videos', $videos);
+                update_post_meta($product_id, '_amazon_has_videos', true);
+            }
+            
+            // Trigger action for extensions
+            do_action('amazon_affiliate_importer_product_created', $product_id, $product_data, $amazon_url, $options);
+            
+            return $product_id;
+            
+        } catch (Exception $e) {
+            return new WP_Error('create_exception', sprintf(__('Failed to create product: %s', 'amazon-affiliate-importer'), $e->getMessage()));
         }
-        
-        // Save video data if available
-        if (isset($product_data['videos']) && !empty($product_data['videos'])) {
-            update_post_meta($product_id, '_amazon_videos', $product_data['videos']);
-            update_post_meta($product_id, '_amazon_has_videos', true);
-        }
-        
-        return $product_id;
     }
     
     /**

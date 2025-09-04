@@ -2,9 +2,11 @@
 Contributors: yourname
 Tags: amazon, affiliate, woocommerce, product, import, scraper
 Requires at least: 5.0
-Tested up to: 6.4
+Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
+WC requires at least: 6.0
+WC tested up to: 9.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
