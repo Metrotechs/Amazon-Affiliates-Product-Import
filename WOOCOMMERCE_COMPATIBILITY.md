@@ -1,15 +1,15 @@
-# WooCommerce Compatibility Report - Amazon Affiliate Product Importer
+# WooCommerce Compatibility Report - Amazon Affiliate Product Importer v0.1
 
 ## Summary of Changes Made
 
-Your Amazon Affiliate Product Importer plugin has been updated to ensure full compatibility with the latest WooCommerce versions and standards. Here are the key improvements:
+Your Amazon Affiliate Product Importer plugin version 0.1 has been updated to ensure full compatibility with the latest WooCommerce versions and standards. Here are the key improvements:
 
 ## 1. Updated Plugin Headers
 
 **File:** `amazon-affiliate-importer.php`
 - Updated WooCommerce compatibility from 8.0 to 9.3
 - Updated WordPress compatibility from 6.4 to 6.6
-- Incremented plugin version to 1.0.1
+- Incremented plugin version to 0.1
 - Added proper Network compatibility declaration
 
 ## 2. Enhanced WooCommerce Integration

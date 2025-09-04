@@ -3,7 +3,7 @@
  * Plugin Name: Amazon Affiliate Product Importer
  * Plugin URI: https://example.com/amazon-affiliate-importer
  * Description: Import Amazon products to WooCommerce with affiliate links for Amazon Associates program.
- * Version: 1.0.1
+ * Version: 0.1
  * Author: Your Name
  * License: GPL v2 or later
  * Text Domain: amazon-affiliate-importer
@@ -21,7 +21,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('AMAZON_AFFILIATE_IMPORTER_VERSION', '1.0.1');
+define('AMAZON_AFFILIATE_IMPORTER_VERSION', '0.1');
 define('AMAZON_AFFILIATE_IMPORTER_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('AMAZON_AFFILIATE_IMPORTER_PLUGIN_URL', plugin_dir_url(__FILE__));
 

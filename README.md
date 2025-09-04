@@ -228,7 +228,7 @@ Check `/wp-content/debug.log` for plugin error messages.
 
 ## Changelog
 
-### Version 1.0.0
+### Version 0.1
 - Initial release
 - Basic Amazon product importing
 - WooCommerce integration

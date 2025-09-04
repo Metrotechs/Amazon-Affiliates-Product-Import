@@ -52,7 +52,7 @@ class AmazonAffiliateImporter_Install {
         dbDelta($sql);
         
         // Store database version
-        add_option('amazon_affiliate_importer_db_version', '1.0');
+        add_option('amazon_affiliate_importer_db_version', '0.1');
     }
     
     /**

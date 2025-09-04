@@ -4,7 +4,7 @@ Tags: amazon, affiliate, woocommerce, product, import, scraper
 Requires at least: 5.0
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 1.0.1
+Stable tag: 0.1
 WC requires at least: 6.0
 WC tested up to: 9.3
 License: GPLv2 or later
@@ -93,7 +93,7 @@ Yes, this plugin is completely free and open source under the GPL license.
 
 == Changelog ==
 
-= 1.0.0 =
+= 0.1 =
 * Initial release
 * Basic Amazon product importing functionality
 * WooCommerce integration
@@ -105,7 +105,7 @@ Yes, this plugin is completely free and open source under the GPL license.
 
 == Upgrade Notice ==
 
-= 1.0.0 =
+= 0.1 =
 Initial release of the Amazon Affiliate Product Importer plugin.
 
 == Additional Notes ==
