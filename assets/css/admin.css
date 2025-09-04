@@ -770,3 +770,49 @@ select.regular-text {
     background: #005a87;
     border-color: #004668;
 }
+
+/* Amazon Reviews Button in Reviews Tab */
+.amazon-reviews-section {
+    margin: 20px 0 !important;
+    padding: 15px !important;
+    background: #f8f9fa !important;
+    border-radius: 4px !important;
+    border: 1px solid #e9ecef !important;
+}
+
+.amazon-reviews-section h4 {
+    margin: 0 0 10px 0 !important;
+    color: #333 !important;
+    font-size: 16px !important;
+}
+
+.amazon-reviews-section p {
+    margin: 0 0 15px 0 !important;
+    color: #666 !important;
+}
+
+.amazon-reviews-button {
+    background: #ff9500 !important;
+    color: white !important;
+    border-color: #ff9500 !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    padding: 8px 16px !important;
+    border-radius: 3px !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+}
+
+.amazon-reviews-button:hover {
+    background: #e6860d !important;
+    border-color: #e6860d !important;
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.amazon-reviews-button:focus {
+    background: #e6860d !important;
+    border-color: #e6860d !important;
+    color: white !important;
+    box-shadow: 0 0 0 2px rgba(255, 149, 0, 0.3) !important;
+}

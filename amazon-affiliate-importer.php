@@ -67,6 +67,8 @@ class AmazonAffiliateImporter {
         require_once AMAZON_AFFILIATE_IMPORTER_PLUGIN_DIR . 'includes/class-product.php';
         require_once AMAZON_AFFILIATE_IMPORTER_PLUGIN_DIR . 'includes/class-scraper.php';
         require_once AMAZON_AFFILIATE_IMPORTER_PLUGIN_DIR . 'includes/class-categories.php';
+        // Add ratings/display helper
+        require_once AMAZON_AFFILIATE_IMPORTER_PLUGIN_DIR . 'includes/class-ratings.php';
     }
     
     public function activate() {
